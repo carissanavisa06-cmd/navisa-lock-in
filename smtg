@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restricted</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:black;
+color:#00ff66;
+font-family:Consolas,monospace;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+.container{
+text-align:center;
+width:90%;
+max-width:600px;
+}
+
+button{
+margin-top:25px;
+padding:12px 35px;
+background:black;
+border:2px solid #00ff66;
+color:#00ff66;
+font-size:18px;
+cursor:pointer;
+transition:.2s;
+}
+
+button:hover{
+background:#00ff66;
+color:black;
+}
+
+input{
+margin-top:15px;
+padding:10px;
+font-size:17px;
+width:180px;
+text-align:center;
+background:#111;
+color:white;
+border:1px solid #00ff66;
+}
+
+#verify,#terminal,#ending{
+display:none;
+}
+
+#terminal{
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+padding:25px;
+background:black;
+color:#00ff66;
+font-size:18px;
+white-space:pre-line;
+overflow:hidden;
+}
+
+#ending{
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:white;
+color:black;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+text-align:center;
+}
+
+h1{
+margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="home">
+
+<h1>Welcome.</h1>
+
+<p>You found this page.</p>
+
+<button onclick="showVerify()">
+CONTINUE
+</button>
+
+</div>
+
+<div class="container" id="verify">
+
+<h2>Verification Required</h2>
+
+<p>Enter my birthday (DD/MM)</p>
+
+<input id="birthday" placeholder="07/07">
+
+<br>
+
+<button onclick="check()">
+VERIFY
+</button>
+
+<p id="wrong" style="color:red;margin-top:15px;"></p>
+
+</div>
+
+<div id="terminal"></div>
+
+<div id="ending">
+
+<h1>😂 GOTCHA!</h1>
+
+<p>You really made it here.</p>
+
+<br>
+
+<p>Everything you saw was just a fake terminal animation.</p>
+
+<br>
+
+<p>Thanks for being curious ❤️</p>
+
+</div>
+
+<script>
+
+function showVerify(){
+
+home.style.display="none";
+verify.style.display="block";
+
+}
+
+function check(){
+
+let value=document.getElementById("birthday").value;
+
+if(value==="07/07"){ // GANTI SESUAI TANGGALMU
+
+verify.style.display="none";
+startTerminal();
+
+}else{
+
+wrong.innerHTML="Access Denied.";
+
+}
+
+}
+
+function startTerminal(){
+
+terminal.style.display="block";
+
+const lines=[
+
+"Initializing...",
+"",
+"01010101 01101110 01110100 01110101 01101011",
+"01100001 01110000 01100001",
+"",
+"01010011 01100001 01101101 01110000 01100001 01101001",
+"",
+"01000010 01100101 01101100 01110101 01101101",
+"",
+"🙂 Masih penasaran ya?",
+"",
+"Loading..."
+];
+
+let i=0;
+
+function next(){
+
+if(i<lines.length){
+
+terminal.innerHTML+=lines[i]+"<br>";
+
+i++;
+
+setTimeout(next,700);
+
+}else{
+
+setTimeout(showEnding,3000);
+
+}
+
+}
+
+next();
+
+}
+
+function showEnding(){
+
+terminal.style.display="none";
+
+ending.style.display="flex";
+
+}
+</script>
+
+</body>
+</html>
